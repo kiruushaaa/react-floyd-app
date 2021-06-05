@@ -11,7 +11,7 @@ const DimensionalInput = (props) => {
   return (
     <div>
       <label className='dim-label' htmlFor='dimNumber'>
-        Размерность:
+        Количество ребер:
       </label>
       <input
         className='dim-number'

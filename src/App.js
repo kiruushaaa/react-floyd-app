@@ -6,7 +6,7 @@ import ResultSection from './components/ResultSection/ResultSection';
 const App = (props) => {
   return (
     <div className='App'>
-      <h1 className='App-title'>Алгоритм Флойда-Уоршелла</h1>
+      <h1 className='App-title'>Алгоритм Флойда-Уоршалла</h1>
       <p className='App-intro'>
         Алгоритм нахождения длин кратчайших путей между всеми парами вершин во
         взвешенном ориентированном графе.

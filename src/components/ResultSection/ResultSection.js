@@ -12,7 +12,7 @@ const ResultSection = (props) => {
 
   const negativeCycle = props.state.info.negativeWeightCycle;
   const shortestPath = props.state.info.shortestPath;
-  debugger;
+
   const generateList = (data) =>
     data.map((matrix) => (
       <li className={s.list__item}>
@@ -33,32 +33,21 @@ const ResultSection = (props) => {
   return (
     <div className={s.container}>
       <div>
-        <p>Матрица смежности на каждой итерации:</p>
+        <p>Матрица расстояний на каждой итерации:</p>
         <ol className={s.list}>{generateList(stepsMatrices)}</ol>
       </div>
 
       <div>
-        <p>Вспомогательная матрица:</p>
+        <p>Справочная матрица:</p>
         <ol>{generateList(stepsWays)}</ol>
       </div>
 
-      <div>
-        {negativeCycle.exists && (
-          <p>
-            Цикл {negativeCycle.path.join(' -> ')} с весом{' '}
-            {negativeCycle.weight}
-          </p>
-        )}
-
-        {shortestPath.exists && (
-          <p>
-            Кратчайший путь:
-            {shortestPath.path.map((way) => (
-              <p>{way.join(' -> ')}</p>
-            ))}
-          </p>
-        )}
-      </div>
+      {negativeCycle.exists && (
+        <div>
+          <p>Цикл отрицательной длины ({negativeCycle.weight}):</p>
+          <p>{negativeCycle.path.reverse().join(' ⟶ ')}</p>
+        </div>
+      )}
     </div>
   );
 };

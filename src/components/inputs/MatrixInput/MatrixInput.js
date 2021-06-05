@@ -17,7 +17,7 @@ const MatrixInput = (props) => {
 
   return (
     <div>
-      <p>Матрица смежности:</p>
+      <p>Матрица расстояний:</p>
       <div>{props.state.matrix.map(generateInputLabel)}</div>
     </div>
   );

@@ -3,32 +3,36 @@ import s from './ResultSection.module.css';
 import { INF } from '../../utils/utils';
 
 const ResultSection = (props) => {
-  const stepsMatrices = [...props.state.info.matrixHistory.values()].map(
+  const info = props.state.info;
+
+  const stepsMatrices = [...info.matrixHistory.values()].map(
     (data) => data.step
   );
-  const stepsWays = [...props.state.info.waysHistory.values()].map(
-    (data) => data.step
-  );
+  const stepsWays = [...info.waysHistory.values()].map((data) => data.step);
 
-  const negativeCycle = props.state.info.negativeWeightCycle;
-  const shortestPath = props.state.info.shortestPath;
+  const negativeCycle = info.negativeWeightCycle;
 
-  const generateList = (data) =>
-    data.map((matrix) => (
-      <li className={s.list__item}>
+  const generateList = (data, isInfo = false) => {
+    const postfix = isInfo ? 'info' : '';
+
+    return data.map((matrix, iteration) => (
+      <li className={s.list__item} key={'matrix' + postfix + iteration}>
         <table className={s.matrix}>
-          {matrix.map((row, i) => (
-            <tr className={s.matrix__row}>
-              {row.map((value, j) => (
-                <td className={s.matrix__cell}>
-                  {value === INF ? '∞' : value}
-                </td>
-              ))}
-            </tr>
-          ))}
+          <tbody>
+            {matrix.map((row, i) => (
+              <tr className={s.matrix__row} key={'row' + postfix + i}>
+                {row.map((value, j) => (
+                  <td className={s.matrix__cell} key={'cell' + postfix + i + j}>
+                    {value === INF ? '∞' : value}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
         </table>
       </li>
     ));
+  };
 
   return (
     <div className={s.container}>
@@ -39,7 +43,7 @@ const ResultSection = (props) => {
 
       <div>
         <p>Справочная матрица:</p>
-        <ol>{generateList(stepsWays)}</ol>
+        <ol>{generateList(stepsWays, true)}</ol>
       </div>
 
       {negativeCycle.exists && (

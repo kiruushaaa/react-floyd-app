@@ -1,11 +1,10 @@
 import React from 'react';
+import { changeDimActionCreator } from '../../../redux/app-reducer';
 
 const DimensionalInput = (props) => {
   const inputChangeHandler = (event) => {
-    props.dispatch({
-      type: 'CHANGE_DIM',
-      payload: { dim: Number(event.target.value) },
-    });
+    let value = Number(event.target.value);
+    props.dispatch(changeDimActionCreator(value));
   };
 
   return (

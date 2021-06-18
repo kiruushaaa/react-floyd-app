@@ -1,8 +1,4 @@
-import {
-  getTemplateMatrix,
-  getRandomizedMatrix,
-  numberifyMatrix,
-} from '../utils/utils';
+import { getRandomizedMatrix } from '../utils/utils';
 import { floyd } from '../algorithm/floyd';
 
 const CHANGE_DIM = 'CHANGE_DIM';
@@ -13,26 +9,41 @@ const RUN_ALGORITHM = 'RUN_ALGORITHM';
 const appReducer = (state, action) => {
   switch (action.type) {
     case CHANGE_DIM:
-      state.dim = action.payload;
-      state.matrix = getRandomizedMatrix(getTemplateMatrix(action.payload));
-      return state;
+      return {
+        ...state,
+        dim: action.payload,
+        matrix: getRandomizedMatrix(action.payload),
+      };
     case CHANGE_MATRIX:
-      let row = action.payload.row;
-      let column = action.payload.column;
-      state.matrix[row][column] = action.payload.value;
-      return state;
+      let { value, row, column } = action.payload;
+      return {
+        ...state,
+        matrix: [
+          ...state.matrix.slice(0, row),
+          [
+            ...state.matrix[row].slice(0, column),
+            value,
+            ...state.matrix[row].slice(column + 1),
+          ],
+          ...state.matrix.slice(row + 1),
+        ],
+      };
     case FILL_MATRIX_RANDOM:
-      state.matrix = getRandomizedMatrix(state.matrix);
-      return state;
+      return {
+        ...state,
+        matrix: getRandomizedMatrix(state.dim),
+      };
     case RUN_ALGORITHM:
-      state.info = floyd(state.dim, numberifyMatrix(state.matrix));
-      return state;
+      return {
+        ...state,
+        info: { ...state.info, ...floyd(state.matrix) },
+      };
     default:
       return state;
   }
 };
 
-export const changeDimActionCreator = (dim) => ({
+export const changeDimActionCreator = dim => ({
   type: CHANGE_DIM,
   payload: dim,
 });

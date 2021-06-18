@@ -1,13 +1,11 @@
+import React from 'react';
 import './App.css';
-import DimensionalInput from './components/inputs/DimensionalInput/DimensionalInput';
-import MatrixInput from './components/inputs/MatrixInput/MatrixInput';
-import ResultSection from './components/ResultSection/ResultSection';
-import {
-  fillMatrixRandomActionCreator,
-  runAlgorithmActionCreator,
-} from './redux/app-reducer';
+import DimensionalInputContainer from './components/inputs/DimensionalInput/DimensionalInputContainer';
+import Controls from './components/Controls/Controls';
+import MatrixInputContainer from './components/inputs/MatrixInput/MatrixInputContainer';
+import ResultSectionContainer from './components/ResultSection/ResultSectionContainer';
 
-const App = (props) => {
+const App = () => {
   return (
     <div className='App'>
       <h1 className='App-title'>Алгоритм Флойда-Уоршалла</h1>
@@ -17,27 +15,10 @@ const App = (props) => {
       </p>
 
       <div className='alg-container'>
-        <DimensionalInput state={props.state} dispatch={props.dispatch} />
-
-        <MatrixInput state={props.state} dispatch={props.dispatch} />
-
-        <div className='btn-group'>
-          <button
-            className='btn alg-btn'
-            type='button'
-            onClick={() => props.dispatch(fillMatrixRandomActionCreator())}>
-            Заполнить случайным образом
-          </button>
-
-          <button
-            className='btn alg-btn'
-            type='button'
-            onClick={() => props.dispatch(runAlgorithmActionCreator())}>
-            Показать результат
-          </button>
-        </div>
-
-        {props.state.info && <ResultSection state={props.state} />}
+        <DimensionalInputContainer />
+        <MatrixInputContainer />
+        <Controls />
+        <ResultSectionContainer />
       </div>
     </div>
   );

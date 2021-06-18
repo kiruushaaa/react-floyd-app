@@ -1,26 +1,20 @@
 import React from 'react';
-import { changeDimActionCreator } from '../../../redux/app-reducer';
 
-const DimensionalInput = (props) => {
-  const inputChangeHandler = (event) => {
-    let value = Number(event.target.value);
-    props.dispatch(changeDimActionCreator(value));
-  };
-
+const DimensionalInput = props => {
   return (
     <div>
-      <label className='dim-label' htmlFor='dimNumber'>
+      <label>
         Количество ребер:
+        <input
+          className='dim-number'
+          type='number'
+          id='dimNumber'
+          min='2'
+          max='10'
+          value={props.value}
+          onChange={props.changeDimHandler}
+        />
       </label>
-      <input
-        className='dim-number'
-        type='number'
-        id='dimNumber'
-        min='2'
-        max='10'
-        value={props.state.dim}
-        onChange={inputChangeHandler}
-      />
     </div>
   );
 };

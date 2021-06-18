@@ -1,8 +1,8 @@
+import cloneDeep from 'lodash.clonedeep';
 import { INF, getTemplateMatrix, getPath } from '../utils/utils';
-import cloneDeep from 'lodash/cloneDeep';
 
-export const floyd = (dim, _matrix) => {
-  const ways = getTemplateMatrix(dim);
+export const floyd = _matrix => {
+  const ways = getTemplateMatrix(_matrix.length, 1);
   const matrix = cloneDeep(_matrix);
 
   const info = {
@@ -11,10 +11,10 @@ export const floyd = (dim, _matrix) => {
     negativeWeightCycle: { exists: false },
   };
 
-  for (let k = 0; k < dim; k++) {
-    for (let i = 0; i < dim; i++) {
+  for (let k = 0; k < matrix.length; k++) {
+    for (let i = 0; i < matrix.length; i++) {
       if (i === k) continue;
-      for (let j = 0; j < dim; j++) {
+      for (let j = 0; j < matrix.length; j++) {
         if (j === k) continue;
         if (
           matrix[i][k] < INF &&

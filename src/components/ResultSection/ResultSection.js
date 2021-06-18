@@ -2,23 +2,16 @@ import React from 'react';
 import s from './ResultSection.module.css';
 import { INF } from '../../utils/utils';
 
-const ResultSection = (props) => {
-  const info = props.state.info;
-
-  const stepsMatrices = [...info.matrixHistory.values()].map(
-    (data) => data.step
-  );
-  const stepsWays = [...info.waysHistory.values()].map((data) => data.step);
-
-  const negativeCycle = info.negativeWeightCycle;
-
+const ResultSection = props => {
   const generateList = (data, isInfo = false) => {
-    const postfix = isInfo ? 'info' : '';
+    let postfix = isInfo ? 'info' : '';
 
-    return data.map((matrix, iteration) => (
-      <li className={s.list__item} key={'matrix' + postfix + iteration}>
-        <table className={s.matrix}>
-          <tbody>
+    return (
+      <ol className={s.list}>
+        {data.map((matrix, iteration) => (
+        <li className={s.list__item} key={'matrix' + postfix + iteration}>
+          <table className={s.matrix}>
+            <tbody>
             {matrix.map((row, i) => (
               <tr className={s.matrix__row} key={'row' + postfix + i}>
                 {row.map((value, j) => (
@@ -28,28 +21,30 @@ const ResultSection = (props) => {
                 ))}
               </tr>
             ))}
-          </tbody>
-        </table>
-      </li>
-    ));
+            </tbody>
+          </table>
+        </li>
+        ))}
+      </ol>
+    );
   };
 
   return (
     <div className={s.container}>
       <div>
         <p>Матрица расстояний на каждой итерации:</p>
-        <ol className={s.list}>{generateList(stepsMatrices)}</ol>
+        {generateList(props.matrixHistory)}
       </div>
 
       <div>
         <p>Справочная матрица:</p>
-        <ol>{generateList(stepsWays, true)}</ol>
+        {generateList(props.waysHistory, true)}
       </div>
 
-      {negativeCycle.exists && (
+      {props.negativeWeightCycle.exists && (
         <div>
-          <p>Цикл отрицательной длины ({negativeCycle.weight}):</p>
-          <p>{negativeCycle.path.reverse().join(' ⟶ ')}</p>
+          <p>Цикл отрицательной длины ({props.negativeWeightCycle.weight}):</p>
+          <p>{props.negativeWeightCycle.path.reverse().join(' ⟶ ')}</p>
         </div>
       )}
     </div>

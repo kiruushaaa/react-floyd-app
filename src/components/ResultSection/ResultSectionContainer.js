@@ -1,5 +1,5 @@
-import {connect} from "react-redux";
-import ResultSection from "./ResultSection";
+import { connect } from 'react-redux';
+import ResultSection from './ResultSection';
 
 const mapStateToProps = state => ({
   matrixHistory: [...state.info.matrixHistory.values()].map(data => data.step),

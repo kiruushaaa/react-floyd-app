@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
+import React, {Fragment} from 'react';
 import s from './Input.module.css';
-import { INF } from '../../../../utils/utils';
+import {INF} from '../../../../utils/utils';
 
 const Input = props => {
   return (

@@ -7,8 +7,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  changeDimHandler: event =>
-    dispatch(changeDimActionCreator(Number(event.target.value))),
+  changeDimHandler: value => dispatch(changeDimActionCreator(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DimensionalInput);

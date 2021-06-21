@@ -1,0 +1,20 @@
+.button {
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 10px 0 0;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: inherit;
+  border: none;
+  border-radius: 10px;
+  background-color: #e5e5e5;
+  transition: opacity 200ms ease-in-out;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.button:active {
+  opacity: 0.6;
+}

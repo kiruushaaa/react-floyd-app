@@ -1,0 +1,37 @@
+.form {
+  display: flex;
+  align-items: center;
+}
+
+.fieldset {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0 10px 0;
+  border: 1px solid #e5e5e5;
+}
+
+.input {
+  display: inline-block;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  border: none;
+  min-width: 40px;
+  font-size: 18px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  display: none;
+}
+
+.button {
+  cursor: pointer;
+  display: inline-block;
+  margin: 0;
+  padding: 8px;
+  border: none;
+  background-color: #e5e5e5;
+  font-size: 20px;
+}

@@ -1,12 +1,12 @@
 import React from 'react';
-import RandomBtnContainer from './RandomButtonContainer';
-import RunBtnContainer from './RunButtonContainer';
+import s from './Controls.module.css';
+import ButtonContainer from './ButtonContainer';
 
 const Controls = () => {
   return (
-    <div>
-      <RandomBtnContainer />
-      <RunBtnContainer />
+    <div className={s.container}>
+      <ButtonContainer random={true} text='Заполнить случайным образом' />
+      <ButtonContainer random={false} text='Показать результаты' />
     </div>
   );
 };

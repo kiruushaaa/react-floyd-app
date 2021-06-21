@@ -24,5 +24,5 @@ export const getPath = (matrix, i, j = i) => {
   return path.map(value => value + 1);
 };
 
-export const getNormalValue = input =>
-  !!Number(input) ? (Number(input) < INF ? Number(input) : INF) : 0;
+export const getNormalValue = (input, max = INF) =>
+  !!Number(input) ? (Number(input) < max ? Number(input) : max) : 0;

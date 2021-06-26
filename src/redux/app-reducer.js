@@ -1,3 +1,5 @@
+import cloneDeep from 'lodash.clonedeep';
+import initialState from './initial-state';
 import { getRandomizedMatrix } from '../utils/utils';
 import { floyd } from '../algorithm/floyd';
 
@@ -13,6 +15,7 @@ const appReducer = (state, action) => {
         ...state,
         dim: action.payload,
         matrix: getRandomizedMatrix(action.payload),
+        info: cloneDeep(initialState.info),
       };
     case CHANGE_MATRIX:
       let { value, row, column } = action.payload;
@@ -27,11 +30,13 @@ const appReducer = (state, action) => {
           ],
           ...state.matrix.slice(row + 1),
         ],
+        info: cloneDeep(initialState.info),
       };
     case FILL_MATRIX_RANDOM:
       return {
         ...state,
         matrix: getRandomizedMatrix(state.dim),
+        info: cloneDeep(initialState.info),
       };
     case RUN_ALGORITHM:
       return {

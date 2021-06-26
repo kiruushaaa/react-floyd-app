@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import classNames from 'classnames';
-import MatrixCell from './MatrixCell';
+import MatrixCellContainer from './MatrixCellContainer';
 import s from './ResultSection.module.css';
 
 const ResultSection = props => {
@@ -20,9 +20,15 @@ const ResultSection = props => {
                     })}
                     key={'row' + i}>
                     {row.map((value, j) => (
-                      <MatrixCell
+                      <MatrixCellContainer
                         key={'cell' + i + j}
+                        position={{ row: i, column: j }}
                         value={value}
+                        isValid={
+                          !props.negativeWeightCycle.exists &&
+                          step === data.length - 1 &&
+                          !isInfo
+                        }
                         isNegative={
                           step === data.length - 1 &&
                           negativeIdx === i &&
@@ -43,15 +49,19 @@ const ResultSection = props => {
 
   return (
     <div className={s.container}>
-      <div>
-        <p>Матрица расстояний на каждой итерации:</p>
-        {generateList(props.matrixHistory)}
-      </div>
+      {props.matrixHistory.length > 0 && (
+        <Fragment>
+          <div>
+            <p>Матрица расстояний на каждой итерации:</p>
+            {generateList(props.matrixHistory)}
+          </div>
 
-      <div>
-        <p>Справочная матрица:</p>
-        {generateList(props.waysHistory, true)}
-      </div>
+          <div>
+            <p>Справочная матрица:</p>
+            {generateList(props.waysHistory, true)}
+          </div>
+        </Fragment>
+      )}
 
       {props.negativeWeightCycle.exists && (
         <div>

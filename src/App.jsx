@@ -4,6 +4,7 @@ import DimensionalInputContainer from './components/inputs/DimensionalInput/Dime
 import Controls from './components/Controls/Controls';
 import MatrixInputContainer from './components/inputs/MatrixInput/MatrixInputContainer';
 import ResultSectionContainer from './components/ResultSection/ResultSectionContainer';
+import { INF } from './utils/utils';
 
 const App = () => {
   return (
@@ -12,6 +13,15 @@ const App = () => {
       <p className='App-intro'>
         Алгоритм нахождения длин кратчайших путей между всеми парами вершин во
         взвешенном ориентированном графе.
+      </p>
+      <p className='App-intro'>
+        Для ввода бесконечности (недостижимость одной вершины из другой)
+        необходимо заполнить поле ввода числом, большим чем {INF}.
+      </p>
+      <p className='App-intro'>
+        При отсутствии цикла отрицательной длины на последнем шаге есть
+        возможность навести на элемент матрицы расстояний, чтобы узнать
+        кратчайший путь.
       </p>
 
       <div className='alg-container'>

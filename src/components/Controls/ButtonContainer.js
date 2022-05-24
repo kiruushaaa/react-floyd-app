@@ -5,13 +5,14 @@ import {
   runAlgorithmActionCreator,
 } from '../../redux/app-reducer';
 
-const mapStateToProps = (state, ownProps) => ({
-  text: ownProps.text,
-  random: ownProps.random,
+const mapStateToProps = (state, { text, random, isPositive }) => ({
+  text,
+  random,
+  isPositive
 });
 
 const mapDispatchToProps = dispatch => ({
-  fillClickHandler: () => dispatch(fillMatrixRandomActionCreator()),
+  fillClickHandler: (isPositive) => dispatch(fillMatrixRandomActionCreator(isPositive)),
   runClickHandler: () => dispatch(runAlgorithmActionCreator()),
 });
 

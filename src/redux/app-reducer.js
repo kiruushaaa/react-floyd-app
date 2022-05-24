@@ -8,17 +8,17 @@ const CHANGE_MATRIX = 'CHANGE_MATRIX';
 const FILL_MATRIX_RANDOM = 'FILL_MATRIX_RANDOM';
 const RUN_ALGORITHM = 'RUN_ALGORITHM';
 
-const appReducer = (state, action) => {
-  switch (action.type) {
+const appReducer = (state, { type, payload }) => {
+  switch (type) {
     case CHANGE_DIM:
       return {
         ...state,
-        dim: action.payload,
-        matrix: getRandomizedMatrix(action.payload),
+        dim: payload,
+        matrix: getRandomizedMatrix(payload),
         info: cloneDeep(initialState.info),
       };
     case CHANGE_MATRIX:
-      let { value, row, column } = action.payload;
+      let { value, row, column } = payload;
       return {
         ...state,
         matrix: [
@@ -35,7 +35,7 @@ const appReducer = (state, action) => {
     case FILL_MATRIX_RANDOM:
       return {
         ...state,
-        matrix: getRandomizedMatrix(state.dim),
+        matrix: getRandomizedMatrix(state.dim, payload.isPositive ? 0 : undefined),
         info: cloneDeep(initialState.info),
       };
     case RUN_ALGORITHM:
@@ -61,8 +61,9 @@ export const changeMatrixActionCreator = (value, params) => ({
   },
 });
 
-export const fillMatrixRandomActionCreator = () => ({
+export const fillMatrixRandomActionCreator = (isPositive) => ({
   type: FILL_MATRIX_RANDOM,
+  payload: { isPositive }
 });
 
 export const runAlgorithmActionCreator = () => ({

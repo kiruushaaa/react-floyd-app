@@ -6,9 +6,7 @@ export const getTemplateMatrix = (dim, acc = 0) =>
   [...Array(dim).keys()].map(_ => [...Array(dim).keys()].map(i => i + acc));
 
 export const getRandomizedMatrix = (dim, min = -5, max = 20) =>
-  getTemplateMatrix(dim).map((row, i) => {
-    return row.map((_, j) => (i === j ? INF : random(min, max)));
-  });
+  getTemplateMatrix(dim).map((row, i) => row.map((_, j) => (i === j ? INF : random(min, max))));
 
 export const getPath = (matrix, i, j = i) => {
   let _matrix = matrix.map(row => row.map(value => value - 1));
@@ -25,4 +23,8 @@ export const getPath = (matrix, i, j = i) => {
 };
 
 export const getNormalValue = (input, max = INF) =>
-  !!Number(input) ? (Number(input) < max ? Number(input) : max) : 0;
+  !!Number(input)
+    ? Number(input) < max
+      ? Number(input)
+      : max
+    : INF;

@@ -1,23 +1,25 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import s from './Input.module.css';
 import {INF} from '../../../../utils/utils';
 
 const Input = props => {
+  const onChange = event => {
+    props.changeMatrix(event.target.value.replace('∞', ''), {
+      row: props.row,
+      column: props.column,
+    })
+  }
+
   return (
-    <Fragment>
+    <>
       <input
         className={s.input}
         type='text'
         value={props.value === INF ? '∞' : props.value}
         disabled={props.row === props.column}
-        onChange={event =>
-          props.changeMatrix(event.target.value, {
-            row: props.row,
-            column: props.column,
-          })
-        }
+        onChange={onChange}
       />
-    </Fragment>
+    </>
   );
 };
 

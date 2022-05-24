@@ -5,8 +5,9 @@ import ButtonContainer from './ButtonContainer';
 const Controls = () => {
   return (
     <div className={s.container}>
-      <ButtonContainer random={true} text='Заполнить случайным образом' />
-      <ButtonContainer random={false} text='Показать результаты' />
+      <ButtonContainer text='Заполнить случайным образом' random />
+      <ButtonContainer text='Заполнить неотрицательными числами' random isPositive />
+      <ButtonContainer text='Показать результат' />
     </div>
   );
 };

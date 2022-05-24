@@ -1,13 +1,17 @@
 import React from 'react';
 import s from './Button.module.css';
 
-const Button = props => {
+const Button = ({ text, random = false, isPositive = false, fillClickHandler, runClickHandler }) => {
+  const onClick = random
+    ? () => fillClickHandler(isPositive)
+    : runClickHandler;
+
   return (
     <button
       className={s.button}
       type='button'
-      onClick={props.random ? props.fillClickHandler : props.runClickHandler}>
-      {props.text}
+      onClick={onClick}>
+      {text}
     </button>
   );
 };
